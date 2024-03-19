@@ -45,18 +45,22 @@ export default function App() {
   return (
   <View style={styles.container}>
     <Camera style={styles.camera} type={type} ref={ref => {setCameraRef(ref);}}>
-      <View style={styles.rodape}>
-        <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-        <Entypo
-          name="cw"
-          size={50}
-          color="white"
-        />
-{/* <Text style={styles.text}>Gire a Câmera</Text> */}
-        </TouchableOpacity>
 
-        <TouchableOpacity
+      <View style={styles.rodape}>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+          <View style={styles.buttonBackground}>
+            <Entypo
+              name="cw"
+              size={35}
+              color="black"
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
         style={styles.button}
         onPress={async () => {
           if(cameraRef){
@@ -64,27 +68,29 @@ export default function App() {
             console.log('photo', photo);
             setPhoto(photo.uri);
           }}}>
-            <Entypo
-              name="camera"
-              size={50}
-              color="white"
-          />
-        {/* <Text style={styles.text}>Tirar foto</Text> */}
-        </TouchableOpacity>
-          {photo && <View>
+            <View style={styles.buttonBackground} >
+              <Entypo
+                name="camera"
+                size={35}
+                color="black"
+              />
+            </View>
+      </TouchableOpacity>
+
+      {photo && <View>
             <TouchableOpacity
               style={styles.button}
               onPress={sharePhoto}>
-                <Entypo
-                  name="share"
-                  size={50}
-                  color="white"
-                />
-                {/* <Text style={styles.text}>Compartilhar Foto</Text> */}
+                <View style={styles.buttonBackground}>
+                  <Entypo
+                    name="share"
+                    size={35}
+                    color="black"
+                  />
+                </View>
             </TouchableOpacity>
           </View>}
-        </View>{/*button-container */}
-      </View>{/*Rodape */}
+      </View>{/*rodape*/}
     </Camera>
     {photo && <Image source={{ uri: photo }} style={{ width:200, height: 200}}/>}
   </View>
@@ -94,30 +100,40 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   camera: {
     flex: 1,
   },
   buttonContainer: {
-    marginRight: 5,
+    flex: 5,
     background: 'transparent',
-    marginTop: -10,
+    marginTop: -80,
+    flexDirection:'row',
     gap: 10,
+    display: 'flex',
   },
 
   button: {
-    gap: 1,
-  },
-  text: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: 'white',
+    flex: 1,
+    justifyContent: 'start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginTop: 20,
+    marginLeft: -90,
   },
   rodape:{
     position: 'absolute',
     top: '80%',
     left: '30%',
+    width: '50%',
     marginBottom: 35,
+    background: 'transparent',
+  },
+  buttonBackground:{
+    backgroundColor: '#FFFF', 
+    borderRadius: 15,
+    alignItems: 'center',
+    width: '17%',
   }
 });
